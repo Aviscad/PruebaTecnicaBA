@@ -1,0 +1,54 @@
+﻿@model List<FrontendRazor.Models.TransaccionesModel>
+
+@{
+    ViewData["Title"] = "Listado de Transacciones";
+    var tarjetaId = ViewData["TarjetaId"] as int?;
+    var nombreCliente = ViewData["NombreCliente"] as string;
+    var numeroTarjeta = ViewData["NumeroTarjeta"] as string;
+}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <h2>Listado de Transacciones</h2>
+                <a href="/" class="btn btn-outline-primary my-2 mx-md-2">Regresar</a>
+            </div>
+            <div class="d-flex gap-4">
+                <div>
+                    <div class="fw-bold py-1">Nombre de Cliente:</div>
+                    <div class="fw-bold py-1">Número de Tarjeta de Crédito:</div>
+                </div>
+                <div>
+                    <div class="text-muted py-1">@nombreCliente</div>
+                    <div class="text-muted py-1">@numeroTarjeta</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body text-center">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:250px">Número de Autorización</th>
+                        <th style="width:200px">Fecha</th>
+                        <th>Descripción</th>
+                        <th style="width:200px">Cargo</th>
+                        <th style="width:200px">Abono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaccion in Model)
+                    {
+                        <tr>
+                            <td>@transaccion.NumeroAutorizacion</td>
+                            <td>@transaccion.Fecha.ToString("dd/MM/yyyy")</td>
+                            <td>@transaccion.Descripcion</td>
+                            <td>@transaccion.Cargo.ToString("C")</td>
+                            <td>@transaccion.Abono.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

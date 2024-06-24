@@ -1,0 +1,51 @@
+﻿@model ComprasModel
+
+@{
+    ViewData["Title"] = "Agregar Compra";
+    var nombreCliente = ViewData["NombreCliente"] as string;
+    var numeroTarjeta = ViewData["NumeroTarjeta"] as string;
+    var tarjetaId = ViewData["TarjetaId"] as int?;
+}
+
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2>Registro de Compra</h2>
+            <div class="d-flex gap-2">
+                <div>
+                    <div class="fw-bold">Nombre de Cliente:</div>
+                    <div class="fw-bold">Número de Tarjeta de Crédito:</div>
+                </div>
+                <div>
+                    <div class="text-muted">@nombreCliente</div>
+                    <div class="text-muted">@numeroTarjeta</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form asp-action="GuardarCompra" method="post" style="max-width: 300px;">
+                <input type="hidden" name="tarjetaId" value="@tarjetaId" />
+                <div class="form-group">
+                    <label asp-for="Fecha">Fecha</label>
+                    <input asp-for="Fecha" type="date" class="form-control" value="@Model.Fecha" required />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Descripcion">Descripción</label>
+                    <input asp-for="Descripcion" class="form-control" required />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Monto">Monto</label>
+                    <input asp-for="Monto" type="number" step="0.01" class="form-control" required />
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary my-2">Guardar</button>
+                <a href="/" class="btn btn-danger my-2 mx-md-2">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EstadoCuenta.Domain.DTOs.TarjetaCreditoDto>
+
+@{
+    ViewData["Title"] = "Tarjetas de Crédito";
+}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2>Tarjetas de Crédito</h2>
+        </div>
+        <div class="card-body text-center">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Número de Tarjeta</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tarjeta in Model)
+                    {
+                        <tr>
+                            <td>@tarjeta.NumeroTarjeta</td>
+                            <td>@tarjeta.Nombre</td>
+                            <td>@tarjeta.Apellidos</td>
+                            <td>
+                                <a asp-controller="TarjetasCredito" asp-action="EstadoCuenta" asp-route-tarjetaId="@tarjeta.TarjetaId" class="btn btn-primary">Estado Cuenta</a>
+                                <a asp-controller="Compras" asp-action="AgregarCompra" asp-route-tarjetaId="@tarjeta.TarjetaId" class="btn btn-success">Registrar Compra</a>
+                                <a asp-controller="Pagos" asp-action="AgregarPago" asp-route-tarjetaId="@tarjeta.TarjetaId" class="btn btn-secondary">Registrar Pago</a>
+                                <a asp-controller="TarjetasCredito" asp-action="Transacciones" asp-route-tarjetaId="@tarjeta.TarjetaId" class="btn btn-warning">Transacciones</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
